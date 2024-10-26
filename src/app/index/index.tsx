@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Text,
   View,
@@ -7,15 +8,18 @@ import {
   Modal,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 import { styles } from "./styles";
 import { colors } from "@/styles/colors";
+import { categories } from "@/utils/categories";
 
 import { Link } from "@/components/link";
 import { Option } from "@/components/option";
 import { Categories } from "@/components/categories";
 
 export default function Index() {
+  const [category, setCategory] = useState(categories[0].name)
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -24,7 +28,7 @@ export default function Index() {
           style={styles.logo}
         ></Image>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.navigate("/add")}>
           <MaterialIcons
             name="add"
             size={32}
@@ -33,7 +37,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      <Categories />
+      <Categories onChange={setCategory} selected={category} />
 
       <FlatList
         data={["1", "2", "3", "4", "5"]}
@@ -50,7 +54,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
       />
 
-      <Modal transparent visible={true}>
+      <Modal transparent visible={false}>
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
