@@ -37,8 +37,9 @@ export default function Add() {
         category,
       });
 
-      const data = await linkStorage.get();
-      console.log(data);
+      Alert.alert("Sucesso", "Link adicionado!", [
+        { text: "Ok", onPress: () => router.back() },
+      ]);
 
       // console.log({ category, name, url });
     } catch (error) {
